@@ -1,4 +1,4 @@
-import { Instance,types } from "mobx-state-tree";
+import { Instance,types,flow } from "mobx-state-tree";
 import {createContext, useContext} from 'react'
 
 interface Country {
@@ -23,7 +23,13 @@ interface Country {
 
 const CountryStore = types.model({
     countries : types.array(types.frozen<Country>())
-});
+})
+.actions((self) => {
+    const refreshCountries = flow(function* (){
+        console.log('refresh the countries')
+    })
+    return {refreshCountries}
+})
 // using types.frozen means hold the API response
 // frozen is ment to hold a value that is is serializable (The process whereby an object or data structure is translated into a format suitable for transferral over a network, or storage (e.g. in an array buffer or file format). In JavaScript, for example, you can serialize an object to a JSON string by calling the function JSON. stringify())  
 // and Immutable -(Immutables are the objects whose state cannot be changed once the object is created.)

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { useStore } from "./mobx/store";
+import { useStore } from './store'
 
 function CountriesList() {
     const {countryStore} =useStore();
@@ -18,3 +18,4 @@ function CountriesList() {
         </div>
     )
 }
+export default CountriesList
