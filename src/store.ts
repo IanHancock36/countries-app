@@ -39,3 +39,10 @@ export function initializeStore(){
     });
     return _store;
 }
+
+// passing the RootStore from the root element to all the elments in the app 
+// Provider API 
+
+export type RootInstance = Instance<typeof RootStore>;
+const RootStoreContext = createContext<null | RootInstance>(null)
+export const Provider = RootStoreContext.Provider
