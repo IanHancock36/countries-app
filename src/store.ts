@@ -1,5 +1,7 @@
-import { Instance,types,flow } from "mobx-state-tree";
+import { Instance,types,flow, cast } from "mobx-state-tree";
 import {createContext, useContext} from 'react'
+import axios from 'axios'
+// import cast from 'axios'
 
 interface Country {
     name: string; 
@@ -27,6 +29,10 @@ const CountryStore = types.model({
 .actions((self) => {
     const refreshCountries = flow(function* (){
         console.log('refresh the countries')
+        const response : Country[] = yield axios
+        .get ("https://restcountries.eu/rest/v2/all")
+        .then((value)=> value.data);
+        self.countries = cast(response)
     })
     return {refreshCountries}
 })
