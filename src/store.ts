@@ -46,3 +46,13 @@ export function initializeStore(){
 export type RootInstance = Instance<typeof RootStore>;
 const RootStoreContext = createContext<null | RootInstance>(null)
 export const Provider = RootStoreContext.Provider
+
+// function to show if store has been initialized appropriately
+
+export function useStore () : Instance<typeof RootStore>{
+    const store = useContext(RootStoreContext);
+    if (store === null){
+        throw new Error ("Store cannot be null")
+    }
+    return store; 
+}
